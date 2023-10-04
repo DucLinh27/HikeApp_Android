@@ -62,7 +62,18 @@ public class HikeAdapter extends RecyclerView.Adapter<HikeAdapter.MyViewHolder> 
 
         holder.buttonDelete.setOnClickListener(view -> confirm(hike.getId(), hike.getName()));
 
-
+        holder.buttonMore.setOnClickListener(view -> {
+            Intent intent = new Intent(context, EditHikeActivity.class);
+            intent.putExtra("id", String.valueOf(hike.getId()));
+            intent.putExtra("name", String.valueOf(hike.getName()));
+            intent.putExtra("location", String.valueOf(hike.getLocation()));
+            intent.putExtra("date", String.valueOf(hike.getDate()));
+            intent.putExtra("parking", String.valueOf(hike.getParking()));
+            intent.putExtra("length", String.valueOf(hike.getLength()));
+            intent.putExtra("level", String.valueOf(hike.getLevel()));
+            intent.putExtra("description", String.valueOf(hike.getDescription()));
+            activity.startActivityForResult(intent,1);
+        });
     }
 
     @Override
