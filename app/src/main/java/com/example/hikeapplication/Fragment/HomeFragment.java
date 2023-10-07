@@ -44,15 +44,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -67,6 +58,8 @@ public class HomeFragment extends Fragment {
     ConnectDb db;
 
     Button buttonDeleteAll;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,6 +85,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(hikeAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        //Button delete
         buttonDeleteAll = view.findViewById(R.id.buttonDeleteAll);
         buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +96,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    // Confirm when delete hike
     void confirm() {
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
         builder.setTitle("Delete all hike?");
@@ -125,6 +120,8 @@ public class HomeFragment extends Fragment {
         });
         builder.create().show();
     }
+
+    //Display hike
     public void displayHike() {
         hikeList.clear();
         hikeList = db.getHike();

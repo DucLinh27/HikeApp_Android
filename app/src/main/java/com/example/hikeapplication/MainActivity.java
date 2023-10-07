@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.example.hikeapplication.Fragment.AddHikeFragment;
 import com.example.hikeapplication.Fragment.HomeFragment;
+import com.example.hikeapplication.Fragment.SearchHikeFragment;
 import com.example.hikeapplication.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new AddHikeFragment());
             } else if (itemId == R.id.home) {
                 replaceFragment(new HomeFragment());
+            }else if (itemId == R.id.search) {
+                replaceFragment(new SearchHikeFragment());
             }
 
             return true;

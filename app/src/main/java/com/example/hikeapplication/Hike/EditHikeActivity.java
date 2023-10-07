@@ -76,10 +76,8 @@ public class EditHikeActivity extends AppCompatActivity {
         int spinnerPosition = adapter.getPosition(level_hike);
         levelSpinner.setSelection(spinnerPosition);
 
-
         save_btn = findViewById(R.id.save_btn);
         save_btn.setOnClickListener(v -> {
-
             String name_hike = name.getText().toString().trim();
             String location_hike = location.getText().toString().trim();
             String date_hike = date.getText().toString().trim();
@@ -192,7 +190,7 @@ public class EditHikeActivity extends AppCompatActivity {
         }
     }
 
-    //    SHOW ALERT ERROR DIALOG
+    //    required fields must be filled
     private void showAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(EditHikeActivity.this);
         builder.setTitle("Error");
@@ -208,7 +206,7 @@ public class EditHikeActivity extends AppCompatActivity {
 
     }
 
-    //    SHOW ALERT CONFIRM DIALOG
+    //    SHOW ALERT CONFIRM
     private void showConfirmDialog(String message, ContentValues values) {
         AlertDialog.Builder builder = new AlertDialog.Builder(EditHikeActivity.this);
         builder.setTitle("Confirmation");
@@ -247,7 +245,7 @@ public class EditHikeActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    //    DATE PICKER DIALOG
+    //    DATE PICKER
     private void initDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override

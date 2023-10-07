@@ -60,8 +60,10 @@ public class HikeAdapter extends RecyclerView.Adapter<HikeAdapter.MyViewHolder> 
         Hike hike = hikes.get(position);
         holder.nameHike.setText(String.valueOf(hike.getName()));
 
+        //Delete button
         holder.buttonDelete.setOnClickListener(view -> confirm(hike.getId(), hike.getName()));
 
+        //Edit button
         holder.buttonMore.setOnClickListener(view -> {
             Intent intent = new Intent(context, EditHikeActivity.class);
             intent.putExtra("id", String.valueOf(hike.getId()));
@@ -114,7 +116,7 @@ public class HikeAdapter extends RecyclerView.Adapter<HikeAdapter.MyViewHolder> 
             }
         };
     }
-
+    // Confirm when delete hike
     void confirm(int id, String name) {
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
         builder.setTitle("Delete hike " + name + " ?");
