@@ -260,5 +260,14 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/description"
             app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/observation_btn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="@string/open_observation"
+            app:layout_constraintEnd_toEndOf="@+id/description"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/save_btn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

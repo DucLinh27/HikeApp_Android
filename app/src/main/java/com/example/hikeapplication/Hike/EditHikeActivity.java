@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.hikeapplication.ConnectDb;
 import com.example.hikeapplication.Fragment.HomeFragment;
 import com.example.hikeapplication.MainActivity;
+import com.example.hikeapplication.Observation.ObservationsActivity;
 import com.example.hikeapplication.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -36,7 +37,7 @@ public class EditHikeActivity extends AppCompatActivity {
     private EditText name, location, date, length, level, description;
     private RadioGroup radioGroup;
     private RadioButton btn_yes, btn_no;
-    private Button save_btn, dateButton;
+    private Button save_btn, dateButton,observation_btn;
     private String id_hike, name_hike, location_hike, date_hike, parking_hike, length_hike, level_hike, description_hike;
     private Spinner levelSpinner;
 
@@ -144,9 +145,19 @@ public class EditHikeActivity extends AppCompatActivity {
                 }
             }
         });
-
-
+        observation_btn = findViewById(R.id.observation_btn);
+        observation_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditHikeActivity.this, ObservationsActivity.class);
+                intent.putExtra("hike_id", String.valueOf(id_hike));
+                startActivity(intent);
+            }
+        });
     }
+
+
+
 
     public void getAndSetData() throws ParseException {
         if (
