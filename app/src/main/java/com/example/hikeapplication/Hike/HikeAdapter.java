@@ -63,7 +63,7 @@ public class HikeAdapter extends RecyclerView.Adapter<HikeAdapter.MyViewHolder> 
         //Delete button
         holder.buttonDelete.setOnClickListener(view -> confirm(hike.getId(), hike.getName()));
 
-        //Edit button
+        //MOre button
         holder.buttonMore.setOnClickListener(view -> {
             Intent intent = new Intent(context, EditHikeActivity.class);
             intent.putExtra("id", String.valueOf(hike.getId()));

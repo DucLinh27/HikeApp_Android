@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
             }else if (itemId == R.id.search) {
                 replaceFragment(new SearchHikeFragment());
             }
-
             return true;
         });
     }

@@ -37,7 +37,7 @@ public class EditHikeActivity extends AppCompatActivity {
     private EditText name, location, date, length, level, description;
     private RadioGroup radioGroup;
     private RadioButton btn_yes, btn_no;
-    private Button save_btn, dateButton,observation_btn;
+    private Button save_btn, dateButton,observation_btn, gallery_btn;
     private String id_hike, name_hike, location_hike, date_hike, parking_hike, length_hike, level_hike, description_hike;
     private Spinner levelSpinner;
 
@@ -76,6 +76,13 @@ public class EditHikeActivity extends AppCompatActivity {
         levelSpinner.setAdapter(adapter);
         int spinnerPosition = adapter.getPosition(level_hike);
         levelSpinner.setSelection(spinnerPosition);
+
+        gallery_btn = findViewById(R.id.gallery_btn);
+        gallery_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(EditHikeActivity.this, GalleryHikeActivity.class);
+            intent.putExtra("hike_id", String.valueOf(id_hike));
+            startActivity(intent);
+        });
 
         save_btn = findViewById(R.id.save_btn);
         save_btn.setOnClickListener(v -> {

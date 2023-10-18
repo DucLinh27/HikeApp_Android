@@ -22,6 +22,8 @@ public class ConnectDb extends SQLiteOpenHelper {
 
     private static final String TABLE_HIKES = "hikes";
     private static final String TABLE_OBSERVATIONS = "observations";
+    private static final String TABLE_IMAGES = "images";
+
 
 
 
@@ -34,8 +36,11 @@ public class ConnectDb extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String hikes_table = "CREATE TABLE " + TABLE_HIKES + "(hike_id INTEGER primary key autoincrement, name TEXT, location TEXT, date TEXT, parking TEXT, length INTEGER, level TEXT,description TEXT);";
         String observations_table = "CREATE TABLE " + TABLE_OBSERVATIONS + "(observation_id INTEGER primary key autoincrement, hike_id INTEGER, name TEXT, time TEXT, comment Text, foreign key(hike_id) references hikes(hike_id));";
+        String image_table = "CREATE TABLE " + TABLE_IMAGES + "(image_id INTEGER primary key autoincrement, imgUrl TEXT, hike_id INTEGER, foreign key(hike_id) references hikes(hike_id))";
+
         sqLiteDatabase.execSQL(hikes_table);
         sqLiteDatabase.execSQL(observations_table);
+        sqLiteDatabase.execSQL(image_table);
 
     }
 
@@ -43,13 +48,13 @@ public class ConnectDb extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_HIKES);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_OBSERVATIONS);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_IMAGES);
         onCreate(sqLiteDatabase);
     }
 
     public void addHike(String name, String location, String date, String parking, String length, String level, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues value = new ContentValues();
-
         value.put("name", name);
         value.put("location", location);
         value.put("date", date);
@@ -193,6 +198,40 @@ public class ConnectDb extends SQLiteOpenHelper {
             Toast.makeText(context, "Delete observation to failed!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Delete observation successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void addImage(String urlImage, int hike_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("imgUrl", urlImage);
+        values.put("hike_id", hike_id);
+
+        long result = db.insert(TABLE_IMAGES, null, values);
+        if(result ==-1){
+            Toast.makeText(context, "Failed to add", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Add image successful", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public Cursor getAllImage(int hike_id) {
+        String queryDB = "SELECT image_id, imgUrl FROM " + TABLE_IMAGES + " WHERE hike_id = " + hike_id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(queryDB, null);
+        }
+        return cursor;
+    }
+
+    public void deleteImage(String urlImage){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_IMAGES, "imgUrl=?", new String[]{urlImage});
+        if (result == -1) {
+            Toast.makeText(context, "Failed to Delete", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Delete Url Image is successful", Toast.LENGTH_SHORT).show();
         }
     }
 }
